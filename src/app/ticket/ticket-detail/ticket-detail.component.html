@@ -1,0 +1,38 @@
+<app-nav-bar></app-nav-bar>
+<div class=" container">
+<div class="jumbotron" style="background-color: beige;clear: both; ">
+  <h4 style="font-weight:400; margin: 10px;padding:10px;float: left;">Ticket Details</h4>
+  <h6 class="text-end" style="padding: 20px;">Ticket Id: {{ticket.ticketId}}</h6>
+</div>
+<hr />
+<br>
+  Summary: {{ticket.summary}}<br>
+  Complaint Type: {{ticket.complaintType}}<br>
+  Description: {{ticket.description}}<br>
+  <button class="btn button-small" (click)="resetForm(form)">Comments</button>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let cmt of service.commentList">
+        <td>"{{cmt.commentData}}"</td>
+        <td></td>
+      </tr>
+    </tbody>
+
+  </table>
+  <form #form = "ngForm" >
+    <input type="hidden" name="commentId"
+  [value]="service.comment.commentId"/>
+  <input type="hidden" name="ticketId"
+  [value]="service.comment.ticketId"/>
+  <div class="form-group">
+    <textarea class = "form-control mt-3" rows = "3" placeholder = "Add a comment"
+    name="commentData" #commentData="ngModel" [(ngModel)]="service.comment.commentData">
+    </textarea>
+  </div>
+  <div class="text-end">
+    <button class="btn btn-secondary mt-3" style="margin-right: 10px;" (click)="resetForm(form)">Cancel</button>
+    <button class="btn btn-dark mt-3" (click)="formSubmit(form)">Add Comment</button>
+  </div>
+  </form>
+
+</div>
